@@ -64,21 +64,75 @@ yarn run ios        # Run via dev-client (iOS)
 
 ---
 
-## 📁 Project Structure
-```bash
-app/
-├── _layout.tsx        # Root Stack layout
-├── index.tsx          # Home Screen
-├── todays-tasks.tsx   # Card: Today's Tasks
-├── notes.tsx          # Card: Notes
-├── quick-capture.tsx  # Card: Quick Capture
-components/
-├── CardLink.tsx       # Reusable card link component
-lib/
-├── supabase/          # Auth and Sync logic
-├── storage/           # Local Storage utils
-state/
-├── useAppStore.ts     # Zustand store
+LifeInDrive/
+├── app/
+│   ├── navigation/
+│   │   ├── AppNavigator.tsx        # Main Stack Navigator (Card-based)
+│   │   ├── TabNavigator.tsx        # Bottom Tabs (Home, Notes, Tasks, etc.)
+│   │   └── RootNavigation.tsx      # Helper for navigating outside screens
+│
+├── screens/
+│   ├── HomeScreen.tsx              # Dashboard linking to cards
+│   ├── TodaysTasksScreen.tsx       # "Today's Tasks" Card
+│   ├── NotesScreen.tsx             # Notes list & editor
+│   ├── QuickCaptureScreen.tsx      # Quick add notes, tasks, images
+│   ├── MyDayScreen.tsx             # Premium AI daily planner
+│   ├── MyPlannerScreen.tsx         # Premium journaling screen
+│   ├── VoiceMemosScreen.tsx        # Voice recording & playback
+│   ├── SettingsScreen.tsx          # Theme, preferences, account
+│   ├── PremiumScreen.tsx           # Upgrade/subscribe flow
+│   └── Auth/
+│       ├── LoginScreen.tsx         # Login
+│       └── RegisterScreen.tsx      # Registration
+│
+├── components/
+│   ├── CardLink.tsx                # Reusable card button
+│   ├── NoteCard.tsx                # Mini note previews
+│   ├── TaskItem.tsx                # Task checklist UI
+│   ├── AudioPlayer.tsx             # Voice memo playback UI
+│   ├── UpgradeBanner.tsx           # Promote Premium plan
+│
+├── constants/
+│   ├── colors.ts                   # Color palettes
+│   ├── fonts.ts                    # Typography setup
+│   └── strings.ts                  # Static text labels
+│
+├── context/
+│   └── ThemeContext.tsx            # Light/Dark mode toggler
+│
+├── hooks/
+│   ├── useAuth.ts                  # Supabase authentication hook
+│   ├── useTasks.ts                 # Fetch/manage tasks
+│   └── useNotes.ts                 # Fetch/manage notes
+│
+├── store/
+│   └── useAppStore.ts               # Zustand global state (theme, auth, user prefs)
+│
+├── lib/
+│   ├── supabase.ts                 # Supabase client config
+│   ├── aiEngine.ts                 # ONNX Runtime AI loader for My Day
+│   ├── ocrEngine.ts                # OCR utilities (for image notes)
+│   ├── iap.ts                      # In-app purchases (react-native-iap)
+│   └── analytics.ts                # PostHog event tracking
+│
+├── utils/
+│   ├── dateUtils.ts                # Date formatting, reminders
+│   ├── storageUtils.ts             # AsyncStorage wrappers
+│   └── navigationUtils.ts          # Navigate outside stack helpers
+│
+├── assets/
+│   ├── images/                     # Logos, icons
+│   ├── fonts/                      # Custom fonts (if needed)
+│   └── audio/                      # Sample audio prompts
+│
+├── .env                            # Environment variables
+├── App.tsx                         # Entry point → RootNavigator
+├── app.json                        # Expo config
+├── babel.config.js                 # Babel config (NativeWind, Reanimated, etc.)
+├── eas.json                        # EAS Build profiles
+├── metro.config.js                 # Asset handling (optional)
+└── README.md                       # Project documentation
+
 ```
 
 ---
